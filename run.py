@@ -7,7 +7,7 @@ import os
 app = FastAPI()
 
 # Define the path to a writeable directory (for example, /tmp/)
-JSON_FILE_PATH = "/tmp/LWINdatabase.json"
+JSON_FILE_PATH = "LWINdatabase.json"
 
 # Load wines from the JSON file
 def load_wines():
