@@ -72,12 +72,15 @@ def query_wines(LWIN: Optional[float] = None, COUNTRY: Optional[str] = None, WIN
     results = []
     for wine in wines_db:
         if (LWIN is None or wine['LWIN'] == LWIN) and \
-           (COUNTRY is None or wine['COUNTRY'].lower() == COUNTRY.lower()) and \
-           (WINE is None or wine['WINE'].lower() == WINE.lower()):
+           (COUNTRY is None or (wine['COUNTRY'] is not None and wine['COUNTRY'].lower() == COUNTRY.lower())) and \
+           (WINE is None or (wine['WINE'] is not None and wine['WINE'].lower() == WINE.lower())):
             results.append(wine)
+    
     if not results:
         raise HTTPException(status_code=404, detail="No wines found.")
+    
     return results
+
 
 # Endpoint to remove a wine
 @app.delete("/wines/{lwin}")
